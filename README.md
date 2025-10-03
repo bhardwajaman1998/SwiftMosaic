@@ -30,13 +30,12 @@ SwiftUI-focused utilities:
 
 In Xcode:
 File > Add Packages…
-
+```
 Enter the repo URL: https://github.com/bhardwajaman1998/SwiftMosaic
-
+```
 ## Quick Start
-
-##########################
 UIKit Example (SwiftCore)
+```
 import SwiftCore
 import UIKit
 
@@ -54,11 +53,9 @@ final class LoginViewModel: BaseViewModel<LoginState> {
 final class LoginViewController: MVVMViewController<LoginViewModel> {
     // Build your UIKit UI here
 }
-
-##########################
-
+```
 SwiftUI Example (SwiftUICore)
-
+```
 import SwiftUICore
 import SwiftUI
 
@@ -70,6 +67,7 @@ final class DashboardVM: ObservableViewModel<DashboardState> {
     }
 }
 
+
 struct DashboardView: View {
     @StateObject var vm = DashboardVM(initialState: DashboardState())
 
@@ -80,7 +78,7 @@ struct DashboardView: View {
         .onAppear { vm.load() }
     }
 }
-##########################
+```
 
 ✅ Current Features (v0.1.0)
 	•	MVVM base classes for Swift + SwiftUI
