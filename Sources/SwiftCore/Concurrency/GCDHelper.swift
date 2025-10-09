@@ -28,9 +28,7 @@ public func after(_ seconds: Double, _ work: @escaping @Sendable () -> Void) {
 
 /// Execute a task synchronously on main thread if already on main; otherwise dispatch async and wait.
 @discardableResult
-public func mainSync<T>(_ work: () -> T) -> T {
+public func mainSync<T>(_ work: @Sendable () -> T) -> T {
     if Thread.isMainThread { return work() }
-    var result: T!
-    DispatchQueue.main.sync { result = work() }
-    return result
+    return DispatchQueue.main.sync(execute: work)
 }

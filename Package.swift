@@ -15,6 +15,12 @@ let package = Package(
     targets: [
         .target(name: "SwiftCore", path: "Sources/SwiftCore"),
         .target(name: "SwiftUICore", path: "Sources/SwiftUICore"),
-        .testTarget(name: "SwiftMosaicTests", dependencies: ["SwiftCore", "SwiftUICore"])
+        .testTarget(
+            name: "SwiftMosaicTests",
+            dependencies: ["SwiftCore", "SwiftUICore"],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency=complete")
+            ]
+        )
     ]
 )

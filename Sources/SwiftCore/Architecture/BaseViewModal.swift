@@ -7,17 +7,17 @@
 
 import Foundation
 
-public protocol ViewModal {
-    associatedType State
+public protocol ViewModel {
+    associatedtype State
     var state: State { get set }
     func bind()
 }
 
-open class BaseViewModal<State>: ViewModal {
+open class BaseViewModel<State>: ViewModel {
     public var state: State
     
-    public init(initializeState: State) {
-        self.state = initializeState
+    public init(initialState: State) {
+        self.state = initialState
     }
     
     open func bind() {}
