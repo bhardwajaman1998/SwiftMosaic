@@ -11,16 +11,36 @@ let package = Package(
     products: [
         .library(name: "SwiftCore", targets: ["SwiftCore"]),
         .library(name: "SwiftUICore", targets: ["SwiftUICore"]),
+        .library(name: "SwiftUIHelpers", targets: ["SwiftUIHelpers"]),
     ],
     targets: [
-        .target(name: "SwiftCore", path: "Sources/SwiftCore"),
-        .target(name: "SwiftUICore", path: "Sources/SwiftUICore"),
+        // SwiftCore: UIKit + logic
+        .target(
+            name: "SwiftCore",
+            path: "Sources/SwiftCore"
+        ),
+
+        // SwiftUIHelpers: pure SwiftUI utilities
+        .target(
+            name: "SwiftUIHelpers",
+            dependencies: [],
+            path: "Sources/SwiftUIHelpers",
+            linkerSettings: [
+                .linkedFramework("SwiftUI")
+            ]
+        ),
+
+        // SwiftUICore: architecture + view models
+        .target(
+            name: "SwiftUICore",
+            dependencies: ["SwiftUIHelpers"],
+            path: "Sources/SwiftUICore"
+        ),
+
+        // Tests
         .testTarget(
             name: "SwiftMosaicTests",
-            dependencies: ["SwiftCore", "SwiftUICore"],
-            swiftSettings: [
-                .enableExperimentalFeature("StrictConcurrency=complete")
-            ]
+            dependencies: ["SwiftCore", "SwiftUICore", "SwiftUIHelpers"]
         )
     ]
 )
